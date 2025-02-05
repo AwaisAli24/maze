@@ -14,8 +14,8 @@ def solve_maze_dfs(maze, start):
     rows, cols = len(maze), len(maze[0])
     stack = [start]
     visited = set()
-    parent = {}  # To reconstruct the path
-    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Right, Down, Left, Up
+    parent = {} 
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  
     
     while stack:
         x, y = stack.pop()
@@ -33,7 +33,7 @@ def solve_maze_dfs(maze, start):
                 stack.append((nx, ny))
                 parent[(nx, ny)] = (x, y)
     
-    return None  # No path found
+    return None 
 
 def reconstruct_path(parent, start, end):
     path = []
@@ -41,13 +41,7 @@ def reconstruct_path(parent, start, end):
         path.append(end)
         end = parent[end]
     path.append(start)
-    return path[::-1]  # Reverse to get correct order
-
-def print_maze_with_path(maze, path):
-    for x, y in path[1:-1]:  # Avoid overwriting start and end
-        maze[x][y] = '.'
-    for row in maze:
-        print(''.join(row))
+    return path[::-1]  
 
 def print_path_coordinates(path):
     print("Path coordinates:")
@@ -59,18 +53,9 @@ def main():
     maze = read_maze_from_file(filename)
     start = find_start(maze)
     
-    if not start:
-        print("Start position not found!")
-        return
-    
     path = solve_maze_dfs(maze, start)
     
-    if path:
-        print("Path found:")
-        print_maze_with_path(maze, path)
-        print_path_coordinates(path)
-    else:
-        print("No path found!")
+    print_path_coordinates(path)
 
 if __name__ == "__main__":
     main()
